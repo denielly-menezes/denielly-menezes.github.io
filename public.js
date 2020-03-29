@@ -693,7 +693,7 @@ $(document).ready(function(){
             let worked_days = $('#worked_days').val();
             let result3 = total_analyses-total_goal;
             /* Meta diária realizada*/
-            let result4 = total_analyses-worked_days;
+            let result4 = total_analyses/worked_days;
             $('#extra_analyses').val(result3);
             $('#daily_goal_achieved').val(result4);
         }
@@ -719,6 +719,68 @@ $(document).ready(function(){
         let percent_balance = $('#percent_balance').val();
         let percent_quality = $('#percent_quality').val();
         let percent_approval = $('#percent_approval').val();
+
+        let info1 = percent_card*extra_analyses;
+        let info2 = extra_analyses - info1;
+        let info3 = 0;
+        let info4 = 0;
+        if(percent_approval>=80){
+            info3 = 1;
+            info4 = 0.5;
+
+        } else{
+            if(percent_approval>=75){
+                info3 = 0.8;
+                info4 = 0.4;
+            } else{
+                if(percent_approval>=70){
+                    info3 = 0.6;
+                    info4 = 0.4;
+                } 
+                
+            }
+
+        }
+        
+        
+
+
+
+        
+        let info5 = info1*info3;
+        let info6 = info2*info4;
+
+
+
+
+
+        let result =  info5+info6;
+
+        if(worked_days / work_days <= 0.5){
+
+            result = 0;
+
+        } 
+
+        if(percent_approval < 70){
+
+            result = 0
+
+        } 
+
+        if(percent_quality < 85){
+
+            result = 0
+
+        } 
+
+        if(result * percent_quality>550){
+
+            result = 550;
+
+        } 
+
+        $('#result').html('<p>Comissão a ser recebida:</p><p>'+result+'</p>')
 
 
 
