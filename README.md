@@ -1,1 +1,0 @@
-# denielly-menezes.github.io
